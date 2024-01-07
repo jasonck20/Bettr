@@ -42,26 +42,25 @@ Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
       title: const Text('Time Selection'),
-      backgroundColor: Colors.blueGrey,
-      elevation: 4,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      elevation: 0,
     ),
     body: SingleChildScrollView(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text("Time to accomplish goal: "),
-              Text(userPost, style: const TextStyle(fontWeight: FontWeight.bold)),
-            ],
-          ),
-          const SizedBox(height: 20),
           const Text(
             "MUST COMPLETE WITHIN 7 DAYS",
             style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           ),
+          
+          const Text(
+            "Lying about completion is strictly prohibited!",
+            textAlign: TextAlign.center, // This centers the text inside the Text widget
+            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+          ),
+         
           const SizedBox(height: 20),
           if (_isVisible)
             TextFormField(
@@ -125,6 +124,18 @@ Widget build(BuildContext context) {
               child: Image(
                 image: AssetImage('images/Orangefox.png'),
               ),
+              
+            ),
+          ),
+           const Padding(
+            padding: EdgeInsets.only(),
+            child: Opacity(
+              opacity: 0.3,
+              child: Image(
+                image: AssetImage('images/jesus.png'),
+             
+              ),
+              
             ),
           ),
         ],

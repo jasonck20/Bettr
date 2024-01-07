@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       }
     });
 
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => HomeScreen(stringValue: '', timeUnit: '', passedValue: '')),
       );
@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 42, 42, 42)],
+            colors: [Color.fromARGB(255, 255, 255, 255), Color.fromARGB(255, 255, 255, 255)],
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),
@@ -87,17 +87,18 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             FadeTransition(
               opacity: _animation,
               child: const Text(
-                'Be bettr',
+                'High Risk   High Reward',
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
-                  color: Colors.white,
-                  fontSize: 24,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
+  
               ),
             ),
           ],

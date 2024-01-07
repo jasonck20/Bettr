@@ -1,6 +1,7 @@
 import 'package:bettr/time_select.dart';
 import 'package:flutter/material.dart';
 
+
 class CreateBet extends StatefulWidget {
   @override
   _CreateBetState createState() => _CreateBetState();
@@ -32,8 +33,8 @@ class _CreateBetState extends State<CreateBet> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(userPost.isEmpty ? 'Create Bet' : userPost),
-        backgroundColor: Colors.blueGrey, // Changed for a better look
-        elevation: 4,
+        backgroundColor: Colors.white, // Changed for a better look
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),

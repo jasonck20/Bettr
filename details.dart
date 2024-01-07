@@ -48,8 +48,8 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
     return Scaffold(
       appBar: AppBar(
         title: const Text('COMPLETED'),
-        backgroundColor: Colors.blueGrey,
-        elevation: 4,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        elevation: 0,
       ),
       body: Stack(
         children: [
@@ -57,13 +57,14 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
             alignment: Alignment.topCenter,
             child: ConfettiWidget(
               confettiController: _confettiController,
-              blastDirection: pi / 2, // Use math.pi for π (downward direction)
-              emissionFrequency: 0.5,
+              blastDirection: pi / 2, // Downward direction
+              emissionFrequency: 0.05,
               numberOfParticles: 20,
-              maxBlastForce: 90,
-              minBlastForce: 60,
-              gravity: 0.3,
-            ),
+              maxBlastForce: 140,  // Increased for more spread
+              minBlastForce: 100,   // Increased for more spread
+              gravity: 0.1,        // Decreased for slower fall
+              blastDirectionality: BlastDirectionality.explosive,            
+              ),
           ),
           Center(
             child: ScaleTransition(
@@ -71,6 +72,11 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
               child: const Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Text(
+                    'A step closer to being your best version!',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
                   Text(
                     'You get to keep your money!',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -84,7 +90,7 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
                   ),
                   SizedBox(height: 20),
                   Text(
-                    'You also managed to avoid downloading Malware',
+                    'You also managed to avoid downloading Malware :)',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
