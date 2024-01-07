@@ -1,6 +1,7 @@
-import 'package:bettr/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async'; // For Timer
+import 'package:bettr/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,6 +12,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+  late Timer _imageTimer;
+  int _imageIndex = 0;
+
+  final List<String> _images = [
+    'images/title1.png',
+    'images/title2.png', // Replace with your actual image paths
+  ];
 
   @override
   void initState() {
@@ -19,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
     );
 
     _animation = CurvedAnimation(
@@ -29,9 +37,19 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _animationController.forward();
 
-    Future.delayed(Duration(seconds: 3), () {
+    _imageTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (_imageIndex < _images.length - 1) {
+        setState(() {
+          _imageIndex++;
+        });
+      } else {
+        timer.cancel();
+      }
+    });
+
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => HomeScreen(stringValue: '', intValue: '', passedValue: '')),
+        MaterialPageRoute(builder: (_) => HomeScreen(stringValue: '', timeUnit: '', passedValue: '')),
       );
     });
   }
@@ -39,6 +57,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void dispose() {
     _animationController.dispose();
+    _imageTimer.cancel();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     super.dispose();
   }
@@ -60,7 +79,13 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           children: [
             FadeTransition(
               opacity: _animation,
-              child: const Image(image: AssetImage('images/mascot.png')),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                child: Image(
+                  key: ValueKey<String>(_images[_imageIndex]),
+                  image: AssetImage(_images[_imageIndex]),
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             FadeTransition(
